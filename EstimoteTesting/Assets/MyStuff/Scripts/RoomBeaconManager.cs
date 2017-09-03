@@ -41,7 +41,7 @@ namespace OMobile.EstimoteUnity
             UpdateUI();
         }
 
-        //start the estimote api 
+        //start the estimote api
         void StartScanning()
         {
             estimoteUnity.StartScanning();
@@ -94,13 +94,13 @@ namespace OMobile.EstimoteUnity
             if (unsortedBeacons.Count < 2)
                 return unsortedBeacons;
             List<EstimoteUnityBeacon> sortedBeacons = new List<EstimoteUnityBeacon>();
-            while(unsortedBeacons.Count > 1)
+            while (unsortedBeacons.Count > 1)
             {
                 double minAcc = unsortedBeacons[0].Accuracy;
                 int minAccIndex = 0;
-                for(int i = 1; i < unsortedBeacons.Count; i++)
+                for (int i = 1; i < unsortedBeacons.Count; i++)
                 {
-                    if(unsortedBeacons[i].Accuracy < minAcc)
+                    if (unsortedBeacons[i].Accuracy < minAcc)
                     {
                         minAcc = unsortedBeacons[i].Accuracy;
                         minAccIndex = i;
@@ -152,7 +152,7 @@ namespace OMobile.EstimoteUnity
         public bool SelectBeacon(CustomBeacon _beacon)
         {
             DeselectBeacon();
-            for(int i = 0; i < estimoteBeacons.Count; i++)
+            for (int i = 0; i < estimoteBeacons.Count; i++)
             {
                 if (estimoteBeacons[i].Major == _beacon.major && estimoteBeacons[i].Minor == _beacon.minor)
                 {
@@ -169,7 +169,7 @@ namespace OMobile.EstimoteUnity
         {
             if (selectedBeacon != null)
             {
-                for(int i = 0; i < customBeacons.Length; i++)
+                for (int i = 0; i < customBeacons.Length; i++)
                 {
                     if (selectedBeacon.Major == customBeacons[i].major && selectedBeacon.Minor == customBeacons[i].minor)
                     {
@@ -183,13 +183,13 @@ namespace OMobile.EstimoteUnity
         {
             EstimoteUnityBeacon clo;        //closest estimote beacon
             double minVal;                  //min value
-            if(estimoteBeacons != null && estimoteBeacons.Count > 0)
+            if (estimoteBeacons != null && estimoteBeacons.Count > 0)
             {
                 clo = estimoteBeacons[0];
                 minVal = clo.RSSI;
-                for(int i = 1; i < estimoteBeacons.Count; i++)
+                for (int i = 1; i < estimoteBeacons.Count; i++)
                 {
-                    if(estimoteBeacons[i].RSSI > minVal)
+                    if (estimoteBeacons[i].RSSI > minVal)
                     {
                         clo = estimoteBeacons[i];
                         minVal = clo.RSSI;
@@ -207,7 +207,7 @@ namespace OMobile.EstimoteUnity
 
         void UpdateUI()
         {
-            EstimoteUnityBeacon curBeacon; 
+            EstimoteUnityBeacon curBeacon;
             Transform curUI;
 
             //Update closest UI
@@ -268,9 +268,9 @@ namespace OMobile.EstimoteUnity
         //Find the Unite representation of each beacon if it exists
         CustomBeacon FindCustomBeacon(EstimoteUnityBeacon estimoteBeacon)
         {
-            for(int i = 0; i < customBeacons.Length; i++)
+            for (int i = 0; i < customBeacons.Length; i++)
             {
-                if(customBeacons[i].major == estimoteBeacon.Major && customBeacons[i].minor == estimoteBeacon.Minor)
+                if (customBeacons[i].major == estimoteBeacon.Major && customBeacons[i].minor == estimoteBeacon.Minor)
                 {
                     return customBeacons[i];
                 }

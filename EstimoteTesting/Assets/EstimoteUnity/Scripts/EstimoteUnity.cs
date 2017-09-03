@@ -17,7 +17,7 @@ namespace OMobile.EstimoteUnity
 		/// <summary>
 		/// The UUID for the beacons you wish to detect. Defaults to Estimote beacons UUID.
 		/// </summary>
-		public string BeaconsUUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
+		public string BeaconsUUID = "7DF9AE00-BB8F-0BAE-2FF9-35C40A26BC9F";
 
 		/// <summary>
 		/// An event called when beacons have been detected. Passes through the list of beacons detected.
@@ -34,13 +34,13 @@ namespace OMobile.EstimoteUnity
 		/// </summary>
 		public void StartScanning ()
 		{
-			#if !UNITY_EDITOR
-			    #if UNITY_IOS
-			        EstimoteUnityIOS.StartScanning (BeaconsUUID);
-			    #elif UNITY_ANDROID
-			        EstimoteUnityAndroid.StartScanning (BeaconsUUID);
-			    #endif
-			#endif
+#if !UNITY_EDITOR
+#if UNITY_IOS
+			EstimoteUnityIOS.StartScanning (BeaconsUUID);
+#elif UNITY_ANDROID
+			EstimoteUnityAndroid.StartScanning (BeaconsUUID);
+#endif
+#endif
 		}
 
 		/// <summary>
@@ -49,13 +49,13 @@ namespace OMobile.EstimoteUnity
 		/// </summary>
 		public void StopScanning ()
 		{
-			#if !UNITY_EDITOR
-			    #if UNITY_IOS
-			        EstimoteUnityIOS.StopScanning ();
-			    #elif UNITY_ANDROID
-			        EstimoteUnityAndroid.StopScanning ();
-			    #endif
-			#endif
+#if !UNITY_EDITOR
+#if UNITY_IOS
+			EstimoteUnityIOS.StopScanning ();
+#elif UNITY_ANDROID
+			EstimoteUnityAndroid.StopScanning ();
+#endif
+#endif
 		}
 
 		#endregion
