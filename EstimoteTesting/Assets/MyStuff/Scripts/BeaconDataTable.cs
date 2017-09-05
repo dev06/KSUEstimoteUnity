@@ -9,17 +9,12 @@ public class BeaconDataTable : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        
-	}
-
-    void StartScanning()
-    {
-
+        data = EstimoteDataRecorder.INSTANCE;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        data = EstimoteDataRecorder.INSTANCE;
+        
         List<BeaconData> beacondata = data.GetData();
         if (beacondata == null)
             return;

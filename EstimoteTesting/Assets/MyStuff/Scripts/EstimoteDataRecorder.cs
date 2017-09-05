@@ -53,21 +53,24 @@ public class EstimoteDataRecorder : MonoBehaviour {
     {
         for(int i = 0; i < beacons.Count; i ++)
         {
-            BeaconData thisBeaconData = nullBeaconData;
+            bool found = false;
             for(int j = 0; j < estimoteBeaconData.Count; j++)
             {
                 if(beacons[i].Major == estimoteBeaconData[j].major && beacons[i].Minor == estimoteBeaconData[j].minor)
                 {
                     estimoteBeaconData[j].AddData(beacons[i].RSSI, beacons[i].LastSeen);
-                    return;
+                    found = true;
+                    break;
                 }
             }
-            if (thisBeaconData.major == nullBeaconData.major)      //make new beacondata if not found
+            if (!found)      //make new beacondata if not found
             {
-                thisBeaconData = new BeaconData(beacons[i].Major, beacons[i].Minor, GetName(beacons[i].Major, beacons[i].Minor));
+                //make new BeaconData, add the recently found data, add to list
+                BeaconData newData = new BeaconData(beacons[i].Major, beacons[i].Minor, GetName(beacons[i].Major, beacons[i].Minor));
+                newData.AddData(beacons[i].RSSI, beacons[i].LastSeen);
+                estimoteBeaconData.Add(newData);
             }
-            estimoteBeaconData.Add(thisBeaconData);
-            estimoteBeaconData[estimoteBeaconData.Count-1].AddData(beacons[i].RSSI, beacons[i].LastSeen);
+            
         }
     }
 
@@ -167,9 +170,10 @@ public struct BeaconData
             //TX power represents RSSI at 1 m...
             float distance = -1;
             float RSSIAtOneMeter = -60.5f;
-            distance = Mathf.Pow(10, (RSSIAtOneMeter - avg) / 20);
+            float n = 2;        //coefficient, good for indoor, can be changed slightly
+            distance = Mathf.Pow(10, (RSSIAtOneMeter - CUR_RSSI) / (10 * n));
 
-            return Mathf.Abs(distance);
+            return distance;
         }
     }
 
